@@ -1,0 +1,148 @@
+/* Al principio tenemos los elementos uno debajo del otro,
+... primero va el titulo, y luego debajo va la lista de navegacion; 
+y, antes de usar FlexBox, debemos saber que el elemento al que se
+le ponga display:flex; debe ser el bloque padre, que con el
+FlexBox manejará a sus los elementos hijos alineados en el eje X;
+o sea, el contenedor como un todo que contiene a sus hijos, y,
+estos hijos estarán de izquierda a derecha, uno detrás del otro
+en el eje X*/
+/*A continuación, tenemos el padre headerPrincipal cuyos hijos son:
+  container y headerPrincipal-nav; en container tenemos un titulo, 
+  y, en headerPrincipal-nav tenemos enlaces de navegación*/
+/*Recuerde que, por defecto, el eje principal del contenedor flex es en horizontal (en fila).   
+Por tanto, los hijos de headerPrincipal, el titulo y los items de navegación, se alinearán uno después del otro en X*/
+.headerPrincipal .container{
+    display: flex; 
+    align-items: center; /* Aquí se centran los elementos de manera vertical, respecto del alto del padre headerPrincipal*/
+    justify-content: space-between; /*Este comando da espacio entre el padre y el hijo, este espacio es justificado, o sea, 
+    que se ajusta respecto de todo el ancho de la pantalla*/
+}
+/*Despues hacemos flex a headerPrincipal-nav para que sus items li, hereden este comportamiento;
+y como ya se miró antes, ahora el container es headerPrincipal-nav, y por tanto, sus items li 
+se pondrán uno al lado del otro, de izquierda a derecha en el eje X*/
+.headerPrincipal-nav{
+   display: flex;
+}
+
+/*SIGUE ARREGLAR EL FOOTER, EN CONCRETO LA SEGUNDA PARTE DEL FOOTER, O SEA, LA PARTE DE ABAJO... */
+.rodapePrincipal-patrocinadores .container{
+  display: flex;
+  justify-content: space-between;
+}
+
+.rodapePrincipal-patrocinadores-list{
+    display:flex;
+    align-items: center; /* centrar verticalmente*/
+    justify-content: space-between; /*damos espacio entre los items*/
+    width: 65%; /*NOTA: con las imagenes no agarra el justify-content: space-between; porque el ancho de todas estas imagenes y
+    piensa que es todo lo que se puede separar, por esto, con width le vamos a dar 65% del espacio (o sea que toma el 65%
+    de su container padre, que se llama container ♥ ), para que se puedan separar dentro de ese espacio.*/
+    margin-right: 5%; /* Separamos el form de enviar mail (donde dice entre en contacto, y luego una caja de texto para escribir,
+    y esta un boton de enviar*/
+}
+
+.rodapePrincipal-contatoForm{
+  width: 20%; /*le damos al form de enviar mail 20% para que tenga esa medida*/
+}
+
+/*En tamaño 100% de la pantalla (viewport), el boton enviar del form enviar correo, se ve que no llega a la altura del cuadro de texto, 
+y además, cuando hacemos la pantalla más chica, el boton del form enviar email, se posiciona debajo de la caja de texto; 
+vamos a ponerle un flex al contenedor del cuadro de texto y del boton enviar email para quitar eso*/
+.rodapePrincipal-contatoForm-fieldset{
+  display: flex;
+}
+
+/*SIGUE EL MAPA DE CURSOS PONERLO COMO COLUMNAS*/
+.rodapePrincipal-navMap-list{
+  display: flex;
+  flex-direction: column;
+  /*le vamos a dar una altura y en combinacion con flex-wrap, al alcanzar esa altura seguira con el siguiente, como en un gusanito:
+  |¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|__|¯¯|   ...
+  ...   pone la columna al ancho que le da flex con la altura de 250px, 
+  luego baja pone la columna al ancho que le da flex y sube a la altura de 250px, y asi hasta que termina con las columnas ... */
+  height: 250px;
+  flex-wrap: wrap;
+}
+/*NOTA: EL FLEX DIRECTION POR DEFECTO VIENE COMO ROW, PERO QUEREMOS COLUMNAS, ASI QUE LO HACEMOS, PERO LAS LISTAS LAS PONE UNA DEBAJO DE OTRA,
+PORQUE POR DEFECTO ES ROW, ASI QUE LE DAMOS ALTURA, Y CON WRAP, CADA 250PX DE LA ALTURA DADA A LAS COLUMNAS, ROMPE EL ESQUEMA Y EMPIEZA
+COMO GUSANITO DE ABAJO HACIA ARRIBA HASTA LA ALTURA INDICADA Y DE IZQUIERDA A DERECHA CON EL ANCHO QUE NECESITA EL ITEM*/
+
+/*LO SIGUIENTE ES ARREGLAR LA SECCION DE CURSOS, DONDE VIENEN LOS ICONOS TIPO ALURA PARA JAVA, PHP, ETC., Y LOS CURSOS SON LI (LIST ITEMS), 
+Y SU PADRE ES LA LISTA (UL) DE NOMBRE: contenidoPrincipal-cursos ...*/
+.contenidoPrincipal-cursos{
+  display: flex;
+  flex-wrap: wrap;
+}
+.contenidoPrincipal-cursos-link{ /*Es la clase de c/u de los li, y le vamos a dar display:flex tmb */
+   display: flex; /* ...porque los li tienen position absolute y eso les impidio tomar el display flex de su padre, por eso estan encimados*/
+   width: 23%;    /*... estan un poco menos encimados, pero les daremos un 23% para c/item del 100% de su container. */
+}/*se pondra wrap en el padre para que cuando tenga un item su 20% corte y rellene en la siguiente columna */
+
+/*  //////////////------------- PARTE RESPONSIVA CABECERA ----------------------- /////////////////////////// */
+/* CON FLEX-DIRECTION: COLUMN SE ALINEAN EN Y PERO NO EN X, ASI QUE HAY QUE CENTRARLOS, VAMOS A ALINEAR AL INICIO, LUEGO A CENTRAR EL TEXTO.-*/
+.headerPrincipal .container{
+  flex-direction: column; /*Por defecto en flex los items quedan en fila uno al lado del otro, y cambiamos este flujo con column*/
+/*y con eso quedan uno debajo del otro*/
+  align-items: initial;
+  text-align: center;
+}
+
+.headerPrincipal-nav{
+  flex-direction: column; 
+}
+
+.videoSobre .container{ /*ESTA PARTE LA HABIAMOS DEJADO AL FINAL*/
+  display: flex;
+}
+.videoSobre-sobre{
+  text-align: center; /*Centramos los textos de este container, tanto para sus links como para su boton*/
+  display: flex;         /* hacemos display flex y direction columna */
+  flex-direction: column; /* para que tengan un ancho proporcionado, y estenn uno bajo el otro */
+}
+.videoSobre-video{
+  flex-grow: 2;
+  flex-shrink: 2; /* SI SE ENCOGE LA PANTALLA QUE TAMBIEN SE ENCOJA*/
+}
+.videoSobre-sobre-list{
+  flex-grow: 2; /* Con flex grow 2, indicamos que son 2 items: la lista y el boton, y el espacio sobrante es para list*/
+}
+
+/*  //////////////------------- PARTE RESPONSIVA CURSOS ----------------------- /////////////////////////// */
+@media (max-width:768px){
+
+.contenidoPrincipal-cursos{
+   flex-direction: column;
+}
+.contenidoPrincipal-cursos-link{
+  width: 100%;
+}
+.rodapePrincipal-navMap-list{
+  height: auto; /*salen diferentes alturas lo
+  mejor sera que tome auto*/
+  flex-wrap: nowrap; /*Ya no se necesita*/
+}
+.rodapePrincipal-patrocinadores .container{
+  flex-direction: column;
+}
+.rodapePrincipal-contatoForm{
+  width: 100%;
+}
+.rodapePrincipal-patrocinadores-list{
+  align-items: center; /*CAMBIAMOS X CENTER*/
+  width: 100%;
+  margin: 0;
+}
+.rodapePrincipal-contatoForm-fieldset{
+  justify-content: center; /*FORM EMAIL*/
+}
+
+.headerPrincipal-nav-link-app{   /* ESTE ENLACE SE ENCUENTRA AL FINAL DE LOS ENLACES DE LA CABECERA*/
+   order: -1;   /* PARA QUE ESTE DE PRIMERA PERO SOLO CUANDO LA PAGINA WEB SE ABRA DESDE UN CELULAR, LE PONEMOS ORDER: -1 */
+}
+
+
+.videoSobre .container{ /*ESTA PARTE LA HABIAMOS DEJADO AL FINAL*/
+  flex-direction: column; /*PARA VERSION MOVIL, QUE SE PONGAN LOS ELEMENTOS UNO DEBAJO DEL OTRO: VIDEO, LISTA Y BOTON*/
+}
+
+}
